@@ -16,6 +16,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 
@@ -26,25 +29,30 @@ public class Account implements Serializable {
     
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int accountID;
+    
+    @ManyToOne
     private User user;
     
     private double balance;
     
-    /*@Enumerated(EnumType.STRING)
-    public enum type{
+    
+    public enum accountType{
         SAVINGS,CHECKING
     }
     
-   type accountType;
+    private accountType type;
+  
     
-    */
+   
     
      
     
-    public Account(User customer,double initBalance /*,type accountType*/){
+    public Account(User customer,double initBalance, accountType type){
         this.user = customer;
         this.balance = initBalance;
-        //this.accountType = accountType;
+        this.type = type;
         
        
     }

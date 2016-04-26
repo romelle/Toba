@@ -117,12 +117,13 @@ public class NewCustomerServlet extends HttpServlet {
             }
         else{
             User user = new User(firstName,lastName,phone,address,city,state,zipcode,email);
-            Account savings = new Account(user,25.00/*,SAVINGS*/);
+            Account savings = new Account(user,25.00,Account.accountType.SAVINGS);
+             Account checking = new Account(user,25.00,Account.accountType.CHECKING);
             
-           // Account checking = new Account(user,0.00/*,CHECKING*/);
+           
             
             AccountDB.insert(savings);
-            
+            AccountDB.insert(checking);
             
             UserDB.insert(user);
             

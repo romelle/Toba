@@ -15,4 +15,16 @@ public class DBUtil{
         return emf;
     }
     
+    
+    
+    public static void closeStatement(Statement s) {
+        try {
+            if (s != null) {
+                s.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
 }
