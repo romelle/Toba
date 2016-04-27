@@ -43,20 +43,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+ 
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -72,12 +59,20 @@ public class LoginServlet extends HttpServlet {
         
         
         HttpSession session = request.getSession();
+        
         String username = request.getParameter("username");
+        
         String password = request.getParameter("password");
-        User user = (User)session.getAttribute("user"); 
-     if(username.equals(user.getUsername()) && (password.equals(user.getPassword()))){
+        //User user = (User)session.getAttribute("user"); 
+         User userid = UserDB.getUserById(username);
          
-      
+        
+        
+        
+     if(username.equals(userid.getUsername()) && (password.equals(userid.getPassword()))){
+          User user = userid.getUser();
+         session.setAttribute("user", user);
+       
          response.sendRedirect("Account_activity.jsp");
      
          

@@ -9,7 +9,6 @@
  * @author Romelle
  */
 
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -184,5 +183,8 @@ public class User implements Serializable {
         
     }
     
+    public User getUser(){
+        return this;
+    }
     
 }

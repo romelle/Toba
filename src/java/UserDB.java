@@ -61,7 +61,7 @@ public class UserDB {
     
   }
     
-   public static User getUserById(long userId){
+   public static User getUserById(String userId){
        EntityManager em = DBUtil.getEmFactory().createEntityManager();
        try{
            User user = em.find(User.class, userId);

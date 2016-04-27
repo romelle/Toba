@@ -117,13 +117,14 @@ public class NewCustomerServlet extends HttpServlet {
             }
         else{
             User user = new User(firstName,lastName,phone,address,city,state,zipcode,email);
-            Account savings = new Account(user,25.00,Account.accountType.SAVINGS);
-             Account checking = new Account(user,25.00,Account.accountType.CHECKING);
+            Account savings = new Account(user,25.00,Account.Type.SAVINGS);
+            Account checking = new Account(user,0.00,Account.Type.CHECKING);
             
            
             
             AccountDB.insert(savings);
             AccountDB.insert(checking);
+           
             
             UserDB.insert(user);
             
@@ -132,12 +133,17 @@ public class NewCustomerServlet extends HttpServlet {
            // session.setAttribute("savings", savings);
             
             session.setAttribute("user",user);
+            session.setAttribute("savings",savings);
+            session.setAttribute("checking",checking);
             url ="/Success.jsp";
             
        }
-        request.setAttribute("message",message);
+        
+            request.setAttribute("message",message);
         getServletContext().getRequestDispatcher(url)
-                    .forward(request, response);    
+                    .forward(request, response);   
+       
+    
      
         
         
