@@ -61,10 +61,10 @@ public class UserDB {
     
   }
     
-   public static User getUserById(String userId){
+   public static User getUserById(String username){
        EntityManager em = DBUtil.getEmFactory().createEntityManager();
        try{
-           User user = em.find(User.class, userId);
+           User user = em.find(User.class, username);
            return user;
        }finally{
            em.close();

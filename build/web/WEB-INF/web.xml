@@ -39,8 +39,8 @@
     <servlet-mapping>
         <servlet-name>NewCustomerServlet</servlet-name>
         <url-pattern>/NewCustomerServlet</url-pattern>
-    </servlet-mapping>
-    <session-config>
+    </servlet-mapping> 
+   <session-config>
         <session-timeout>
             30
         </session-timeout>
