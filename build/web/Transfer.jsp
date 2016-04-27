@@ -6,15 +6,23 @@
 <div class="main-container">
         <div class="container-form">
             
-            <form action="TranactionServlet" method="post">
+            
                 <p>Transfer Funds</p>
-                <p>${savings}</p>
-                <input type="text" name="amtSavings"> 
-                <p>${checking}</p>
-                <input type="text" name="amtChecking"> 
-                <input type="submit" name="submit">
+                <p>Savings: $ ${savings.balance}</p>
+                
+                <p>Checking: $ ${checking.balance}</p>
+                
           
-            </form>  
+             <form action="TransactionServlet" method="post">
+            <label>Transfer Direction:</label>
+            <select name="direction">
+                <option>Savings to Checking</option>
+                <option>Checking to Savings</option>
+            </select><br>
+            <label>Amount:</label>
+            <input type="number" name="amount" value="0"><br>
+            <input type="submit" value="Transfer Funds" id="submit">
+        </form>
             
             
             
