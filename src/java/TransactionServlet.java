@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import com.toba.bll.Account;
+import com.toba.bll.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -73,28 +75,47 @@ public class TransactionServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user"); 
-        Account account = new Account();
-        String amtSavings = request.getParameter("amtSavings");
-        String amtChecking = request.getParameter("amtChecking");
         
+        
+        
+        
+        
+        Double amount = Double.parseDouble(request.getParameter("amount"));
+        String option = request.getParameter("options");
         
        
         
         
-        
-        
-     if( amtSavings == null){
+       if(amount >0) {
+       //Checking to Savings
+     if( option.equals("1")){
+         user.getAccount(Account.AccountType.SAVINGS).debit(amount);
+         user.getAccount(Account.AccountType.CHECKING).credit(amount);
+        AccountDB.update(user.getAccount(Account.AccountType.SAVINGS));
+        AccountDB.update(user.getAccount(Account.AccountType.CHECKING));
          
-      
-         response.sendRedirect("Account_activity.jsp");
+         
+         response.sendRedirect("Transaction.jsp");
+     }//Savings to Checking
+     else if( option.equals("2")){
+          user.getAccount(Account.AccountType.SAVINGS).credit(amount);
+         user.getAccount(Account.AccountType.CHECKING).debit(amount);
+         
+        AccountDB.update(user.getAccount(Account.AccountType.SAVINGS));
+        AccountDB.update(user.getAccount(Account.AccountType.CHECKING));
+        
+         response.sendRedirect("Transaction.jsp");
+     }
+    }
      
+     else{
          
-     }else{
-         
-         response.sendRedirect("Login_failure.jsp");
-         
+         response.sendRedirect("Transfer.jsp");
+         String message;
+         message ="Please enter a numberic value";
          
      }
+      session.setAttribute("user",user);
      processRequest(request, response);   
     }
 

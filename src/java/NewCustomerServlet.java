@@ -5,6 +5,8 @@
  */
 
 
+import com.toba.bll.Account;
+import com.toba.bll.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -119,23 +121,13 @@ public class NewCustomerServlet extends HttpServlet {
             User user = new User(firstName,lastName,phone,address,city,state,zipcode,email);
             
             
-           
-            
-           
-           
-            
             UserDB.insert(user);
             
-           Account savings = new Account(user,25.00,Account.Type.SAVINGS);
-            Account checking = new Account(user,0.00,Account.Type.CHECKING);
-            AccountDB.insert(savings);
-            AccountDB.insert(checking);
-           
+        
             
-            
+       
             session.setAttribute("user",user);
-            session.setAttribute("savings",savings);
-            session.setAttribute("checking",checking);
+            
             url ="/Success.jsp";
             
        }

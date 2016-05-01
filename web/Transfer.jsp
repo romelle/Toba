@@ -8,20 +8,20 @@
             
             
                 <p>Transfer Funds</p>
-                <p>Savings: $ ${savings.balance}</p>
                 
-                <p>Checking: $ ${checking.balance}</p>
+                <p>Savings: $ ${user.getSavingsBalance()}</p>
+                <p>Checking: $ ${user.getCheckingBalance()}</p>
                 
-          
              <form action="TransactionServlet" method="post">
-            <label>Transfer Direction:</label>
-            <select name="direction">
-                <option>Savings to Checking</option>
-                <option>Checking to Savings</option>
+            <label>Transfer Options:</label>
+            <select name="options">
+                <option value="1">Savings to Checking</option>
+                <option value="2">Checking to Savings</option>
             </select><br>
             <label>Amount:</label>
-            <input type="number" name="amount" value="0"><br>
-            <input type="submit" value="Transfer Funds" id="submit">
+            <input type="number" min="0" value="0" size="3" name="amount" /><br>
+             <input type="number" name="quantity" min="1" value="0" size="4">
+            <input type="submit" value="transfer" id="submit">
         </form>
             
             

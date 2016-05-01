@@ -6,9 +6,10 @@
             
   
             
-            <div class="main-container top-margin5"><h1> TOBA </h1>
-                    
-                    <h3>Titan Online Banking Application</h3>       
-                    
+            <div class="main-container top-margin5"><h1> Account Balances </h1>
+                
+                <p>Savings: $ ${user.getSavingsBalance()}</p>
+                <p>Checking: $ ${user.getCheckingBalance()}</p>    
+                <p>Total : ${user.getSavingsBalance() + user.getCheckingBalance()}</p>  
             </div>
                    <c:import url="footer.jsp" />

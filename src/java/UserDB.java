@@ -12,6 +12,7 @@
 
 
 
+import com.toba.bll.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
@@ -61,15 +62,17 @@ public class UserDB {
     
   }
     
-   public static User getUserById(String username){
+   public static User getUserById(String userId){
        EntityManager em = DBUtil.getEmFactory().createEntityManager();
        try{
-           User user = em.find(User.class, username);
-           return user;
+           User user = em.find(User.class, userId);
+           return user; 
        }finally{
            em.close();
        }
    }
  
+ 
+   
     
 }

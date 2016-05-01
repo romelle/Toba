@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.toba.bll.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -70,9 +71,7 @@ public class LoginServlet extends HttpServlet {
         
         
      if(username.equals(userid.getUsername()) && (password.equals(userid.getPassword()))){
-          User user = userid.getUser();
-         session.setAttribute("user", user);
-       
+          
          response.sendRedirect("Account_activity.jsp");
      
          

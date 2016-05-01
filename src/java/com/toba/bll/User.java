@@ -8,13 +8,20 @@
  *
  * @author Romelle
  */
+package com.toba.bll;
+
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+
 
 
 @Entity
@@ -43,6 +50,9 @@ public class User implements Serializable {
     private String zipcode;
     @Column(name="email")
     private String email;
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private ArrayList<Account> accounts;
+    
     
     public User(){
         
@@ -61,6 +71,10 @@ public class User implements Serializable {
         this.email = email;
         this.username= this.lastName + this.zipcode;
         this.password= "welcome1";
+        
+        this.accounts = new ArrayList<Account>();
+        this.accounts.add(new Account(25.00,Account.AccountType.SAVINGS));
+        this.accounts.add(new Account(0.00,Account.AccountType.CHECKING));
         
     }
     
@@ -186,8 +200,22 @@ public class User implements Serializable {
         
     }
     
-    public User getUser(){
-        return this;
+   public Account getAccount(Account.AccountType which){
+        
+        for(Account a: this.accounts){
+            if (a.getAccountType() == which)
+                return a;
+        } 
+        return null;
     }
+   
+   public double getCheckingBalance(){
+       Account checking =  getAccount(Account.AccountType.CHECKING);
+       return checking.getBalance();
+   }
     
+   public double getSavingsBalance(){
+       Account checking =  getAccount(Account.AccountType.SAVINGS);
+       return checking.getBalance();
+   }
 }

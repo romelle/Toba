@@ -1,3 +1,5 @@
+package com.toba.bll;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,14 +12,13 @@
  */
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
 
 
 
@@ -27,46 +28,36 @@ public class Account implements Serializable {
     
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountID;
     
-    @ManyToOne
-    private User user;
-  
-    
+    @Column(name="Balance")
     private double balance;
     
     
     
-    public enum Type{
+    public enum AccountType{
         SAVINGS,CHECKING
     }
     
     @Enumerated(EnumType.STRING)
-    private Type type;
+    public AccountType accountType;
   
     
    
-     public Account(){
-      this.user=null;
-     this.balance = 0.00;
-     this.type=Type.SAVINGS;
-    }
-    public Account(User customer,double balance, Type type){
-        this.user = customer;
+     public Account(){}
+     
+    public Account(double balance, AccountType type){
         this.balance = balance;
-        this.type = type;
+        this.accountType= type;
         
        
     }
     
     
-  public Type getAccountType(){
-      return this.type;
-  }
   
-  public void setType(Type type){
-      this.type=type;
+  public void setType(AccountType type){
+      this.accountType=type;
   }
     
     public double credit(double creditAmmount){
@@ -76,6 +67,7 @@ public class Account implements Serializable {
     }
     
     public double debit (double debitAmount){
+        
             balance -= debitAmount;
             return balance;
         }
@@ -86,14 +78,8 @@ public class Account implements Serializable {
     }   
     
 
-    public User getUser(){
-        
-        return this.user;
+    public AccountType getAccountType(){
+        return this.accountType;
     }
-   
-    public void setUser(User user){
-        this.user = user;
-    }
-
     
 }
