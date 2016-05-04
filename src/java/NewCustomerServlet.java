@@ -9,6 +9,7 @@ import com.toba.bll.Account;
 import com.toba.bll.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -118,9 +119,20 @@ public class NewCustomerServlet extends HttpServlet {
             
             }
         else{
+            String password = request.getParameter("password");
             User user = new User(firstName,lastName,phone,address,city,state,zipcode,email);
+            String saltedAndHashedPassword;
             
             
+            try {
+                saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);                    
+            
+            } catch (NoSuchAlgorithmException ex) {
+                saltedAndHashedPassword = ex.getMessage();
+            }
+            
+            request.setAttribute("saltedAndHashedPassword", saltedAndHashedPassword);
+            user.setPassword(saltedAndHashedPassword);
             UserDB.insert(user);
             
         

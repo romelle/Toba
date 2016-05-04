@@ -64,13 +64,13 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         
         String password = request.getParameter("password");
-        //User user = (User)session.getAttribute("user"); 
-         User userid = UserDB.getUserById(username);
+        User user = (User)session.getAttribute("user"); 
+         
          
         
         
         
-     if(username.equals(userid.getUsername()) && (password.equals(userid.getPassword()))){
+     if(username.equals(user.getUsername()) && (password.equals(user.getPassword()))){
           
          response.sendRedirect("Account_activity.jsp");
      
